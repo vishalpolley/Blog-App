@@ -1,0 +1,34 @@
+{% load staticfiles %}
+<!--DOCTYPE html -->
+<html>
+<head>
+<title>
+{% block head_title %}Blog App{% endblock head_title %}
+</title>
+{% include 'css.html' %}
+</head>
+
+<body>
+{% include "messages_display.html" %}
+
+<div class='container'>
+    <ol class='breadcrumb'>
+        <li><a href='{% url "posts:list" %}'>Home</a></li>
+        {% block post_detail_link %}
+        {% endblock %}
+
+        {% if not request.user.is_authenticated %}
+        <li class='pull-right'><a href='{% url "register" %}'>Register</a></li>
+        <li class='pull-right'><a href='{% url "login" %}'>Login</a></li>
+        {% else %}
+        <li class='pull-right'><a href='{% url "logout" %}'>Logout</a></li>
+        <li class='pull-right'><a href='{% url "posts:create" %}'>Create Post</a></li>
+				<li class='pull-right'>Welcome, {{ request.user.username }}</li>
+        {% endif %}
+    </ol>
+{% block content %}{% endblock content %}
+</div>
+
+{% include 'javascript.html' %}
+</body>
+</html>

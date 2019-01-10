@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block head_title %}
+	{{ instance.title }} | {{ block.super }}
+{% endblock head_title %}
+
+{% block post_detail_link %}
+	<li><a href='{{ instance.get_absolute_url }}'>{{ instance.title }}</a></li>
+{% endblock %}
+
+{% block content %}
+
+<div class='col-sm-6 col-sm-offset-3'>
+{% if instance.image %}
+	<img src='{{ instance.image.url }}' class='img-responsive' />
+{% endif %}
+<h1 style="font-family: 'PT Serif', serif;">{{ title }}</h1>
+<h4 style="font-family: 'PT Serif', serif;">- {{ instance.user.username }} <small>{{ instance.timestamp }}</small></h4>
+{{ instance.content|linebreaks }}<br/>
+{% if request.user.id is instance.user.id %}
+<a href="{% url 'posts:update' id=instance.id %}" class="btn btn-warning btn-xs">Update Post</a>
+<a href="{% url 'posts:delete' id=instance.id %}" class="btn btn-danger btn-xs">Delete Post</a>
+{% endif %}
+</div>
+
+{% endblock content %}

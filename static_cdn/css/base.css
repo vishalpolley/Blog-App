@@ -1,0 +1,7 @@
+body {
+  background-color: #e8e8e8;
+  background-image: url("https://www.transparenttextures.com/patterns/concrete-wall.png");
+}
+h1, h2, h3, h4, small, p, a {
+  font-family: 'PT Serif', serif;
+}
